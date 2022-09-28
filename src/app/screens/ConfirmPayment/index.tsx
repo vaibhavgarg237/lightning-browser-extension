@@ -33,6 +33,7 @@ function ConfirmPayment() {
 
   const navState = useNavigationState();
   const paymentRequest = navState.args?.paymentRequest as string;
+  const hideBudget = navState.args.hideBudget;
   const invoice = lightningPayReq.decode(paymentRequest);
 
   const navigate = useNavigate();
@@ -131,16 +132,17 @@ function ConfirmPayment() {
                   description={invoice.tagsObject.description}
                 />
               </div>
-
-              <BudgetControl
-                fiatAmount={fiatBudgetAmount}
-                remember={rememberMe}
-                onRememberChange={(event) => {
-                  setRememberMe(event.target.checked);
-                }}
-                budget={budget}
-                onBudgetChange={(event) => setBudget(event.target.value)}
-              />
+              {!hideBudget && (
+                <BudgetControl
+                  fiatAmount={fiatBudgetAmount}
+                  remember={rememberMe}
+                  onRememberChange={(event) => {
+                    setRememberMe(event.target.checked);
+                  }}
+                  budget={budget}
+                  onBudgetChange={(event) => setBudget(event.target.value)}
+                />
+              )}
             </div>
           </div>
           <div>

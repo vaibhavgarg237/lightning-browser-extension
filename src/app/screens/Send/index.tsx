@@ -95,6 +95,7 @@ function Send() {
           state: {
             args: {
               paymentRequest: invoice,
+              hideBudget: true,
             },
           },
         });
